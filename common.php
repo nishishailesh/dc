@@ -1,71 +1,7 @@
 <?php
 
-
-//This echo make coommon.php unsuitable for tcpdf
-echo '<script>
-
-function run_ajax(str,rid)
-{
-	//create object
-	xhttp = new XMLHttpRequest();
-	
-	//4=request finished and response is ready
-	//200=OK
-	//when readyState status is changed, this function is called
-	//responceText is HTML returned by the called-script
-	//it is best to put text into an element
-	xhttp.onreadystatechange = function() {
-	  if (this.readyState == 4 && this.status == 200) {
-		document.getElementById(rid).innerHTML = this.responseText;
-	  }
-	};
-
-	//Setting FORM data
-	xhttp.open("POST", "save_dc.php", true);
-	
-	//Something required ad header
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	
-	// Submitting FORM
-	xhttp.send(str);
-	
-	//used to debug script
-	//alert("Used to check if script reach here");
-}
-
-function make_post_string(id,t)
-{
-	k=t.id;
-	v=encodeURIComponent(t.value);					//to encode almost everything
-	post=\'field=\'+k+\'&value=\'+v+\'&id=\'+id;
-	//post=post.replace(/\+/g,\'%2B\');
-	return post;							
-}
-
-function do_work(id,t)
-{
-	str=make_post_string(id,t);
-	//alert(post);
-	run_ajax(str,\'response\');
-}
-
-function getfrom(one,two) {
-			document.getElementById(two).value =one.value;
-		}
-	
-
-function hide(one) {
-				document.getElementById(one).style.display = "none";
-		}
-
-			
-</script>
-<script type="text/javascript" src="date/datepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="date/datepicker.css" /> 
-';
-
-require_once 'menu_hmis.php';
 require_once '/var/gmcs_config/staff.conf';
+
 
 function login_varify()
 {
@@ -775,20 +711,41 @@ function get_user_right($id)
 }
 
 
-function export_to_csv($sql,$link)
-{
-	if(!$result=mysqli_query($link,$sql)){echo mysqli_error($link);}
-	$fp = fopen('php://output', 'w');
-	if ($fp && $result) 
-	{
-		header('Content-Type: text/csv');
-		header('Content-Disposition: attachment; filename="export.csv"');
-		while ($row = mysqli_fetch_assoc($result))
-		{
-			fputcsv($fp, array_values($row));
-		}
-	}	
-	
+
+function menu()
+{	
+		
+echo '
+<form method=post>
+<table class=\"menu\">
+<tr><td>
+		<button type=button onclick="showhidemenu(\'button1\')">Discarge Card</button>
+		<table  id="button1" class="menu" style="position:absolute; display:none;">
+			<tr><td>
+				<button formaction=new_dc.php type=submit onclick="hidemenu()" name=new>New</button>
+			</td></tr>			
+			<tr><td>
+				<button formaction=search_dc.php type=submit onclick="hidemenu()" name=new>Search</button>
+			</td></tr>
+		</table>
+			
+</td><td>
+		<button  type=button onclick="showhidemenu(\'button2\')">Manage My Account('.$_SESSION['login'].')</button>
+		<table  id="button2" class="menu" style="position: absolute;display:none;">
+		<tr><td>
+			<button formaction=logout.php type=submit onclick="hidemenu()" name=new>Logout</button>
+		</td></tr>
+		<tr><td>
+			<button formaction=change_pass.php type=submit onclick="hidemenu()" name=new>Change Password</button>
+		</td></tr>
+		</table>	
+</td></tr>
+</table>
+</form>
+';
+
 }
+
+
 
 ?>

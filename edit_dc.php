@@ -1,41 +1,13 @@
 <?php
 session_start();
 require_once 'common.php';
+require_once 'common_js.php';
 
 //print_r($_POST);
 //////////////
 // Every body who can login and belong to same department can edit it
 //////////////
-echo '
-<style>
-	
-table{
-   border-collapse: collapse;
-}
 
-.border td , .border th{
-    border: 1px solid gray;
-}
-
-.upload{
-	background-color:lightpink;	
-}
-
-.noborder{
- border: none;
-}
-
-
-.hidedisable
-{
-	display:none;diabled:true
-}
-
-.section_header
-{
-	background-color:gray;
-}
-</style>';		
 
 function echo_csv($csv)
 {
@@ -159,9 +131,11 @@ function edit_pt($link,$pt)
 	echo 	'</tr>';
 
 
-	$ar=array('Hb', 'Platelet', 'TC', 'DC', 'Hematocrit', 'Creatinine', 'Sodium', 'Potassium', 'Glucose', );
+	//$ar=array('Hb', 'Platelet', 'TC', 'DC', 'Hematocrit', 'Creatinine', 'Sodium', 'Potassium', 'Glucose', );
 
-	$counter=0;
+	//$counter=0;
+	
+	/*
 	foreach ($ar as $value)
 	{
 		if($counter%3==0){echo '<tr>';}
@@ -170,8 +144,9 @@ function edit_pt($link,$pt)
 		if($counter%3==2){echo '</tr>';}
 		$counter++;	
 	}
-
-	$ar=array('pus_culture', 'urine_culture', 'Urine_microscopy');
+	*/
+	
+	$ar=array('pus_culture', 'urine_culture', 'Urine_microscopy','Hb', 'Platelet', 'TC', 'DC', 'Hematocrit', 'Creatinine', 'Sodium', 'Potassium', 'Glucose');
 
 	$counter=0;
 	foreach ($ar as $value)

@@ -2,51 +2,11 @@
 session_start();
 
 require_once 'common.php';
+require_once 'common_js.php';
 
-echo '<html><head><script type="text/javascript" >
-		function showhide(one) {
-			if(document.getElementById(one).style.display == "block")
-			{
-				document.getElementById(one).style.display = "none";
-			}
-			else
-			{
-				document.getElementById(one).style.display = "block";
-			}	
-		}
-		</script>';
+echo '<html><head>';
 		
-echo '
-<style>
-	
-table{
-   border-collapse: collapse;
-}
 
-.border td , .border th{
-    border: 1px solid gray;
-}
-
-.upload{
-	background-color:lightpink;	
-}
-
-.noborder{
- border: none;
-}
-
-
-.hidedisable
-{
-	display:none;diabled:true
-}
-
-.section_header
-{
-	background-color:gray;
-}
-</style>';		
-		
 echo '</head>';	
 echo '<body>';
 

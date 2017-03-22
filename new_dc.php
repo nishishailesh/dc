@@ -1,36 +1,8 @@
 <?php
 session_start();
 require_once 'common.php';
-echo '
-<style>
+require_once 'common_js.php';
 	
-table{
-   border-collapse: collapse;
-}
-
-.border td , .border th{
-    border: 1px solid gray;
-}
-
-.upload{
-	background-color:lightpink;	
-}
-
-.noborder{
- border: none;
-}
-
-
-.hidedisable
-{
-	display:none;diabled:true
-}
-
-.section_header
-{
-	background-color:gray;
-}
-</style>';		
 //////////////
 $link=connect();
 

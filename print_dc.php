@@ -1,100 +1,8 @@
 <?php
 session_start();
-//require_once 'common.php';
-#require_once('tcpdf/config/lang/eng.php');
-require_once('tcpdf/tcpdf.php');
+require_once 'tcpdf/tcpdf.php';
 require_once '/var/gmcs_config/staff.conf';
-
-
-//////////////
-
-function get_raw($link,$sql)
-{
-	//echo $sql;
-	if(!$result=mysqli_query($link,$sql)){echo mysqli_error($link);return FALSE;}
-	if(mysqli_num_rows($result)!=1){echo mysqli_error($link);return false;}
-	else
-	{
-		return mysqli_fetch_assoc($result);
-	}
-}
-
-function login_varify()
-{
-	return mysqli_connect('127.0.0.1',$GLOBALS['main_user'],$GLOBALS['main_pass']);
-}
-
-
-function mysql_to_india_date($yyyymmdd)
-{
-	$ex=explode('-',$yyyymmdd);
-	if(count($ex)==3)
-	{
-		return $ex[2].'-'.$ex[1].'-'.$ex[0];
-	}
-	else
-	{
-		return false;
-	}
-}
-
-/////////////////////////////////
-function select_database($link)
-{
-	return mysqli_select_db($link,'dc');
-}
-
-
-function check_user($link,$u,$p)
-{
-	$sql='select * from user where id=\''.$u.'\'';
-	if(!$result=mysqli_query($link,$sql)){return FALSE;}
-	$result_array=mysqli_fetch_assoc($result);
-	if(md5($p)==$result_array['password'])
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-
-
-function logout()
-{
-	session_start(); //Start the current session
-	session_destroy(); //Destroy it! So we are logged out now
-	header("location:".$GLOBALS['rootpath']."/common/index.php"); //configure absolute path of this file for access from anywhere
-}
-///////////////////////////////////
-function connect()
-{
-	if(!$link=login_varify())
-	{
-		echo 'database login could not be verified<br>';
-	
-		exit();
-	}
-
-
-	if(!select_database($link))
-	{
-		echo 'database could not be selected<br>';
-	
-		exit();
-	}
-	
-	if(!check_user($link,$_SESSION['login'],$_SESSION['password']))
-	{
-		echo 'application user could not be varified<br>';
-		
-		exit();
-	}
-	
-return $link;
-}
+require_once 'common.php';
 
 $link=connect();
 $id=$_POST['id'];
@@ -122,16 +30,6 @@ $str=$str.	'<table>
 			<td width="33%"></td>
 			<td width="33%" ></td>
 		</tr>';
-		/*
-		<tr >
-			<th colspan="2" width="66%" align="center" style="font:bold;border-collapse: collapse;border: 1px solid black;" >New Civil Hospital Majura Gate Surat<br>Discharge Card<br>'.$pt['department'].'</th>
-			<th  width="33%" align="center" style="border-collapse: collapse;border: 1px solid black;width:3cm;height:3cm;">';
-		
-$cl=echo_csv($pt['clinician']);
-$str=$str.$cl;
-
-$str=$str.'</th></tr>';*/
-
 
 $str=$str.	'<tr>';
 $str=$str.		'<td width="33%" style="border-collapse: collapse;border: 1px solid black;">'.$pt['mrd'].'</td>';
@@ -257,13 +155,6 @@ $str=$str.	'</table></body></html>';
 
 	$pdf->Output($pt['ipd'].'.pdf', 'I');
 
-/*
-echo $pt['treatment_in_ward'];
-echo '<br>';
-$b=str_replace("\n","<br>",$pt['treatment_in_ward']);
-echo $b;
 
-echo '<table border=1><tr><td>'.$b.'</td></tr></table>';
-*/
 
 ?>

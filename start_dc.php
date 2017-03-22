@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'common.php';
+require_once 'common_js.php';
 
 if(!isset($_SESSION['login']))
 {

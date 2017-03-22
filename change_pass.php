@@ -1,45 +1,16 @@
 <?php
 session_start();
 require_once 'common.php';
+require_once 'common_js.php';
 echo '<html>';
 echo '<head>';
 
-echo '
-
-<style>
-	
-table{
-   border-collapse: collapse;
-}
-
-.border td , .border th{
-    border: 1px solid black;
-}
-
-.upload{
-	background-color:lightpink;	
-}
-
-.noborder{
- border: none;
-}
-
-
-.hidedisable
-{
-	display:none;diabled:true
-}
-
-</style>
-
-
-';
 echo '</head>';
 echo '<body>';
 function read_password()
 {
-	echo '<table border=1 class="style2"><form method=post>';
-	echo '<tr><th colspan=2 class="head">Change Password for access to Staff Database</th></tr>';
+	echo '<table class="border lightblue"><form method=post>';
+	echo '<tr><th colspan=2 class="head">Change Password</th></tr>';
 	echo '<tr><td>Login ID</td>	<td><input readonly=yes type=text name=id value=\''.$_SESSION['login'].'\'></td></tr>'; 
 	echo '<tr><td>Old Password</td>	<td><input type=password name=old_password></td></tr>';
 	echo '<tr><td>New Password</td>	<td><input type=password name=password_1></td></tr>';
@@ -130,13 +101,13 @@ else
 }
 
 echo
-'<table class=border>
-		<tr><th class="head">Help</th></tr>
+'<table class="border lightgray">
+		<tr><th>Help</th></tr>
 		<tr><td><li>Write old and new password carefully.</td></tr>
 		<tr><td><li>close browser and start again after changing password</td></tr>
 		<tr><td><li>Change password frequently</td></tr>
 		<tr><td><li>Donot reveal your password to anybody.</td></tr>
-		<tr><td><li>If your colleague needs access, ask them to contact HOD</td></tr>
+		<tr><td><li>If your collegue needs access, ask them to contact HOD</td></tr>
 		<tr><td><li>If you can not access your account, meet IT section of the college/hospital</td></tr>
  </table>';
 

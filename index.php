@@ -2,40 +2,10 @@
 session_start();
 
 require_once 'common.php';
+require_once 'common_js.php';
 
 echo '<html>';
 echo '<head>';
-
-echo '
-
-<style>
-	
-table{
-   border-collapse: collapse;
-}
-
-.border td , .border th{
-    border: 1px solid black;
-}
-
-.upload{
-	background-color:lightpink;	
-}
-
-.noborder{
- border: none;
-}
-
-
-.hidedisable
-{
-	display:none;diabled:true
-}
-
-</style>
-
-
-';
 
 echo '</head>';
 echo '<body>';
