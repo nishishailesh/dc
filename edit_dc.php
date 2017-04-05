@@ -273,6 +273,11 @@ function display_pt($pt)
 	
 }
 
+function copy_prototype($pr,$ipd)
+{
+
+	
+}
 /////////////Main script start from here//////////////
 
 $link=connect();
@@ -289,6 +294,11 @@ if(isset($_POST['id']))
 	
 	//try to find a patient							
 	$pt=get_raw($link,'select * from pt where ipd=\''.$_POST['id'].'\'');
+
+	if(isset($_POST['prototype']))
+	{
+		$pr=get_raw($link,'select * from pt where ipd=\''.$_POST['prototype'].'\'');
+	}
 	
 	//if no such patient exist, insert new. called when id returned by new_dc.php
 	if($pt===FALSE)
@@ -302,6 +312,40 @@ if(isset($_POST['id']))
 			update_field_by_id($link,'pt','ipd',$_POST['id'],'unit',$u['unit']);
 			//set lock to 0 for initial insertion
 			update_field_by_id($link,'pt','ipd',$_POST['id'],'lock','0');
+			////////////Copy from prototype
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'diagnosis',$pr['diagnosis']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'complains',$pr['complains']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'pus_culture',$pr['pus_culture']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'urine_culture',$pr['urine_culture']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'Urine_microscopy',$pr['Urine_microscopy']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'x_ray',$pr['x_ray']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'USG',$pr['USG']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'ECG',$pr['ECG']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'OT',$pr['OT']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'treatment_in_ward',$pr['treatment_in_ward']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'condition_on_discharge',$pr['condition_on_discharge']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'advise_on_discharge',$pr['advise_on_discharge']);
+			update_field_by_id($link,'pt','ipd',$_POST['id'],'followup',$pr['followup']);
+			////////////end of copy from prototype
+				/*
+
+ `diagnosis` varchar(100) NOT NULL,
+ `complains` varchar(500) NOT NULL,
+ `pus_culture` varchar(100) NOT NULL,
+ `urine_culture` varchar(100) NOT NULL,
+ `Urine_microscopy` varchar(100) NOT NULL,
+ `x_ray` varchar(300) NOT NULL,
+ `USG` varchar(300) NOT NULL,
+ `ECG` varchar(300) NOT NULL,
+ `OT` varchar(2000) NOT NULL,
+ `treatment_in_ward` varchar(1000) NOT NULL,
+ `condition_on_discharge` varchar(1000) NOT NULL,
+ `advise_on_discharge` varchar(500) NOT NULL,
+ `followup` varchar(500) NOT NULL,
+  
+	 */
+			
+			
 			//reread again
 			$pt=get_raw($link,'select * from pt where ipd=\''.$_POST['id'].'\'');
 		}
