@@ -56,6 +56,19 @@ CREATE TABLE `department` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `discharge_type`
+--
+
+DROP TABLE IF EXISTS `discharge_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `discharge_type` (
+  `discharge_type` varchar(100) NOT NULL,
+  PRIMARY KEY (`discharge_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `location`
 --
 
@@ -94,15 +107,15 @@ CREATE TABLE `pt` (
   `MLC_no` varchar(20) NOT NULL,
   `bloodgroup` varchar(20) NOT NULL,
   `complains` varchar(500) NOT NULL,
-  `Hb` varchar(50) NOT NULL DEFAULT '  gm/dL',
-  `Platelet` varchar(50) NOT NULL DEFAULT '  /(mm)3',
-  `TC` varchar(50) NOT NULL,
-  `DC` varchar(50) NOT NULL,
-  `Hematocrit` varchar(50) NOT NULL,
-  `Creatinine` varchar(50) NOT NULL,
-  `Sodium` varchar(50) NOT NULL,
-  `Potassium` varchar(50) NOT NULL,
-  `Glucose` varchar(50) NOT NULL,
+  `Hb` varchar(250) NOT NULL DEFAULT '  gm/dL',
+  `Platelet` varchar(250) NOT NULL DEFAULT '  /(mm)3',
+  `TC` varchar(250) NOT NULL,
+  `DC` varchar(250) NOT NULL,
+  `Hematocrit` varchar(250) NOT NULL,
+  `Creatinine` varchar(250) NOT NULL,
+  `Sodium` varchar(250) NOT NULL,
+  `Potassium` varchar(250) NOT NULL,
+  `Glucose` varchar(250) NOT NULL,
   `pus_culture` varchar(100) NOT NULL,
   `urine_culture` varchar(100) NOT NULL,
   `Urine_microscopy` varchar(100) NOT NULL,
@@ -113,6 +126,7 @@ CREATE TABLE `pt` (
   `reference` varchar(500) NOT NULL,
   `OT` varchar(2000) NOT NULL,
   `treatment_in_ward` varchar(1000) NOT NULL,
+  `discharge_type` varchar(100) NOT NULL,
   `condition_on_discharge` varchar(1000) NOT NULL,
   `advise_on_discharge` varchar(500) NOT NULL,
   `followup` varchar(500) NOT NULL,
@@ -151,6 +165,24 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `user_pass`
+--
+
+DROP TABLE IF EXISTS `user_pass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_pass` (
+  `id` bigint(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `password` varchar(300) NOT NULL,
+  `department` varchar(100) NOT NULL,
+  `unit` varchar(10) NOT NULL,
+  `right` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -161,4 +193,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-08 22:09:02
+-- Dump completed on 2017-04-05 16:15:13
